@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>블로그 · 다이빙 로그 — GrowthDiver</title>
+<meta name="description" content="AI 실험, GEO 최적화, 그로스 마케팅에 대한 기록. GrowthDiver의 다이빙 로그.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://growthdiver.kr/blog.html">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F5F7F8; --bg-soft:#ECF1F2; --abyss:#0B1626; --ink:#0B1626;
+    --teal:#0E7C86; --teal-deep:#0A5A62; --amber:#F2A65A; --slate:#64707C;
+    --line:#DEE4E7; --white:#FFFFFF;
+    --font-display:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-body:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  body{ font-family:var(--font-body); background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  .nav{ position:fixed; top:0; left:0; right:0; z-index:200; padding:22px 0;
+    background:rgba(245,247,248,.88); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
+  .nav__inner{ display:flex; align-items:center; justify-content:space-between; }
+  .nav__logo{ font-family:var(--font-mono); font-weight:600; font-size:.95rem; color:var(--abyss); display:flex; align-items:center; gap:8px; }
+  .nav__logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 3px rgba(14,124,134,.15); }
+  .nav__links{ display:flex; gap:2.5rem; align-items:center; }
+  .nav__links a{ font-size:.88rem; font-weight:500; color:var(--slate); position:relative; padding:4px 0; display:inline-block;
+    transition:color .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1); }
+  .nav__links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:100%; height:1.5px; background:var(--teal);
+    transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  .nav__links a:hover{ color:var(--ink); transform:translateY(-1px); }
+  .nav__links a:hover::after{ transform:scaleX(1); }
+  .nav__links a.active{ color:var(--teal-deep); font-weight:600; }
+  .nav__links a.active::after{ transform:scaleX(1); }
+  .nav__cta{ font-size:.85rem; font-weight:600; color:var(--white) !important; background:var(--abyss); padding:14px 40px;
+    border-radius:99px; white-space:nowrap; position:relative; overflow:hidden;
+    transition:background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1); }
+  .nav__cta::before{ content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent); transform:skewX(-20deg); transition:left .7s ease; }
+  .nav__cta:hover::before{ left:140%; }
+  .nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
+  .nav__cta::after{ display:none; }
+  .nav__burger{ display:none; }
+  @media (max-width:860px){ .nav__links{ display:none; } .nav__burger{ display:block; font-family:var(--font-mono); font-size:.8rem; color:var(--ink); background:none; border:1px solid var(--line); padding:8px 14px; border-radius:99px; } }
+
+  .page-hero{ padding:180px 0 70px; background:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(14,124,134,.10), transparent 60%); }
+  .section__eyebrow{ font-family:var(--font-mono); font-size:.72rem; font-weight:500; color:var(--teal-deep);
+    letter-spacing:.1em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section__eyebrow::before{ content:''; width:20px; height:1px; background:var(--teal); }
+  .page-hero__title{ font-family:var(--font-display); font-weight:800; font-size:clamp(2.2rem,5vw,3.4rem);
+    letter-spacing:-.02em; line-height:1.2; max-width:720px; margin-bottom:20px; }
+  .page-hero__desc{ color:var(--slate); font-size:1.05rem; max-width:600px; line-height:1.8; }
+
+  section{ padding-bottom:100px; }
+
+  /* filter tabs */
+  .filters{ display:flex; gap:10px; margin:44px 0 8px; flex-wrap:wrap; }
+  .filter-tab{
+    font-family:var(--font-mono); font-size:.78rem; font-weight:500; color:var(--slate);
+    background:var(--white); border:1px solid var(--line); border-radius:99px; padding:9px 20px;
+    cursor:pointer; transition:all .3s cubic-bezier(.16,1,.3,1);
+  }
+  .filter-tab:hover{ border-color:var(--teal); color:var(--teal-deep); transform:translateY(-2px); }
+  .filter-tab.active{ background:var(--abyss); color:var(--white); border-color:var(--abyss); }
+
+  .blog__grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:36px; }
+  .blog__card{
+    border:1px solid var(--line); border-radius:18px; padding:28px 24px; background:var(--white);
+    transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1), border-color .5s ease;
+  }
+  .blog__card:hover{ transform:translateY(-8px); box-shadow:0 24px 44px rgba(11,22,38,.09); border-color:transparent; }
+  .blog__tag{
+    display:inline-block; font-family:var(--font-mono); font-size:.68rem; font-weight:600; color:var(--teal-deep);
+    background:rgba(14,124,134,.09); padding:5px 12px; border-radius:99px; margin-bottom:16px;
+  }
+  .blog__date{ font-family:var(--font-mono); font-size:.72rem; color:var(--slate); margin-bottom:12px; }
+  .blog__title{ font-weight:700; font-size:1.05rem; line-height:1.5; margin-bottom:10px; color:var(--ink); }
+  .blog__excerpt{ font-size:.86rem; color:var(--slate); line-height:1.7; }
+  .blog__status{ margin-top:16px; font-size:.74rem; color:var(--amber); font-weight:600; font-family:var(--font-mono); }
+  @media (max-width:860px){ .blog__grid{ grid-template-columns:1fr; } }
+
+  .empty-note{
+    margin-top:40px; padding:24px; border:1px dashed var(--line); border-radius:16px;
+    text-align:center; color:var(--slate); font-size:.9rem;
+  }
+
+  .contact{ background:var(--abyss); color:var(--white); text-align:center; padding:130px 0 90px; }
+  .contact__title{ font-family:var(--font-display); font-weight:800; font-size:clamp(2rem,4.6vw,3rem); letter-spacing:-.02em; margin-bottom:22px; }
+  .contact__title .accent{ color:var(--amber); }
+  .contact__desc{ color:rgba(255,255,255,.65); font-size:1.02rem; margin-bottom:40px; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-size:.92rem; font-weight:600; padding:14px 28px; border-radius:99px;
+    position:relative; overflow:hidden; transition:transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), background .35s ease; }
+  .btn::before{ content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent); transform:skewX(-20deg); transition:left .7s ease; }
+  .btn:hover::before{ left:140%; }
+  .btn--primary{ background:var(--teal); color:var(--white); }
+  .btn--primary:hover{ background:#5FC3CC; color:var(--abyss); transform:translateY(-3px) scale(1.02); box-shadow:0 16px 32px rgba(0,0,0,.24); }
+
+  .footer{ background:var(--abyss); border-top:1px solid rgba(255,255,255,.08); padding:36px 0; }
+  .footer__inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer__logo{ font-family:var(--font-mono); font-size:.82rem; color:rgba(255,255,255,.5); }
+  .footer__links{ display:flex; gap:24px; }
+  .footer__links a{ font-size:.8rem; color:rgba(255,255,255,.45); transition:color .2s; }
+  .footer__links a:hover{ color:var(--white); }
+
+  .reveal{ opacity:0; transform:translateY(36px) scale(.97); filter:blur(6px);
+    transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  .blog__card:nth-child(1){ transition-delay:0s; }
+  .blog__card:nth-child(2){ transition-delay:.08s; }
+  .blog__card:nth-child(3){ transition-delay:.16s; }
+  .blog__card:nth-child(4){ transition-delay:.24s; }
+  .blog__card:nth-child(5){ transition-delay:.32s; }
+  .blog__card:nth-child(6){ transition-delay:.4s; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav__inner">
+    <a href="index.html" class="nav__logo"><span class="dot"></span>GROWTHDIVER</a>
+    <div class="nav__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html" class="active">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+      <a href="contact.html" class="nav__cta">문의하기</a>
+    </div>
+    <button class="nav__burger">MENU</button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="section__eyebrow">Blog · 다이빙 로그</p>
+    <h1 class="page-hero__title">실험은 기록될 때<br>자산이 됩니다</h1>
+    <p class="page-hero__desc">GEO 실험, AI 자동화, 그로스 마케팅에 대한 생각을 기록하는 공간입니다.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="filters">
+      <button class="filter-tab active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="geo">GEO 실험</button>
+      <button class="filter-tab" data-filter="ai">AI 자동화</button>
+      <button class="filter-tab" data-filter="marketing">마케팅 인사이트</button>
+    </div>
+
+    <div class="blog__grid" id="blogGrid">
+      <div class="empty-note" style="grid-column:1/-1">글을 불러오는 중...</div>
+    </div>
+
+    <p class="empty-note" id="emptyNote" style="display:none">아직 게시된 글이 없습니다. 곧 첫 글이 업로드됩니다.</p>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="contact__title">새 글이 <span class="accent">궁금하다면</span></h2>
+    <p class="contact__desc">실험 기록이 쌓이는 대로 가장 먼저 전해드리고 싶습니다.</p>
+    <a href="contact.html" class="btn btn--primary">문의하기</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const CAT_LABEL = { geo:'GEO 실험', ai:'AI 자동화', marketing:'마케팅 인사이트' };
+  let allPosts = [];
+
+  function cardHtml(p, i){
+    return `
+      <a href="post.html?id=${p.id}" class="blog__card reveal" data-cat="${p.category}" style="transition-delay:${(i % 6) * 0.08}s; display:block">
+        <span class="blog__tag">${CAT_LABEL[p.category] || p.category || ''}</span>
+        <div class="blog__date">${p.created_at || ''}</div>
+        <div class="blog__title">${escapeHtml(p.title)}</div>
+        <div class="blog__excerpt">${escapeHtml(p.excerpt || '')}</div>
+      </a>
+    `;
+  }
+  function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  async function loadPosts(){
+    const grid = document.getElementById('blogGrid');
+    const emptyNote = document.getElementById('emptyNote');
+    try {
+      const res = await fetch('/api/posts');
+      const data = await res.json();
+      allPosts = data.posts || [];
+      if (!allPosts.length){
+        grid.innerHTML = '';
+        emptyNote.style.display = 'block';
+        emptyNote.textContent = '아직 게시된 글이 없습니다. 곧 첫 글이 업로드됩니다.';
+        return;
+      }
+      renderPosts('all');
+    } catch (e) {
+      grid.innerHTML = '';
+      emptyNote.style.display = 'block';
+      emptyNote.textContent = '글을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
+    }
+  }
+
+  function renderPosts(filter){
+    const grid = document.getElementById('blogGrid');
+    const emptyNote = document.getElementById('emptyNote');
+    const filtered = filter === 'all' ? allPosts : allPosts.filter(p => p.category === filter);
+    if (!filtered.length){
+      grid.innerHTML = '';
+      emptyNote.style.display = 'block';
+      emptyNote.textContent = '해당 카테고리에 아직 글이 없습니다.';
+      return;
+    }
+    emptyNote.style.display = 'none';
+    grid.innerHTML = filtered.map(cardHtml).join('');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold:0.1 });
+    grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderPosts(tab.dataset.filter);
+    });
+  });
+
+  loadPosts();
+</script>
+
+</body>
+</html>

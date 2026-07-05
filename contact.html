@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>문의하기 — GrowthDiver</title>
+<meta name="description" content="데이터와 AI로 성장을 설계하는 그로스 마케팅 컨설팅 문의.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://growthdiver.kr/contact.html">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F5F7F8; --bg-soft:#ECF1F2; --abyss:#0B1626; --ink:#0B1626;
+    --teal:#0E7C86; --teal-deep:#0A5A62; --amber:#F2A65A; --slate:#64707C;
+    --line:#DEE4E7; --white:#FFFFFF; --red:#C0392B;
+    --font-display:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-body:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  body{ font-family:var(--font-body); background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  .nav{ position:fixed; top:0; left:0; right:0; z-index:200; padding:22px 0;
+    background:rgba(245,247,248,.88); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
+  .nav__inner{ display:flex; align-items:center; justify-content:space-between; }
+  .nav__logo{ font-family:var(--font-mono); font-weight:600; font-size:.95rem; color:var(--abyss); display:flex; align-items:center; gap:8px; }
+  .nav__logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 3px rgba(14,124,134,.15); }
+  .nav__links{ display:flex; gap:2.5rem; align-items:center; }
+  .nav__links a{ font-size:.88rem; font-weight:500; color:var(--slate); position:relative; padding:4px 0; display:inline-block;
+    transition:color .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1); }
+  .nav__links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:100%; height:1.5px; background:var(--teal);
+    transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  .nav__links a:hover{ color:var(--ink); transform:translateY(-1px); }
+  .nav__links a:hover::after{ transform:scaleX(1); }
+  .nav__cta{ font-size:.85rem; font-weight:600; color:var(--white) !important; background:var(--abyss); padding:14px 40px;
+    border-radius:99px; white-space:nowrap; position:relative; overflow:hidden;
+    transition:background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1); }
+  .nav__cta::before{ content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent); transform:skewX(-20deg); transition:left .7s ease; }
+  .nav__cta:hover::before{ left:140%; }
+  .nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
+  .nav__cta::after{ display:none; }
+  .nav__burger{ display:none; }
+  @media (max-width:860px){ .nav__links{ display:none; } .nav__burger{ display:block; font-family:var(--font-mono); font-size:.8rem; color:var(--ink); background:none; border:1px solid var(--line); padding:8px 14px; border-radius:99px; } }
+
+  .page-hero{ padding:180px 0 60px; background:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(14,124,134,.10), transparent 60%); }
+  .section__eyebrow{ font-family:var(--font-mono); font-size:.72rem; font-weight:500; color:var(--teal-deep);
+    letter-spacing:.1em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section__eyebrow::before{ content:''; width:20px; height:1px; background:var(--teal); }
+  .page-hero__title{ font-family:var(--font-display); font-weight:800; font-size:clamp(2.2rem,5vw,3.2rem);
+    letter-spacing:-.02em; line-height:1.2; max-width:640px; margin-bottom:20px; }
+  .page-hero__desc{ color:var(--slate); font-size:1.05rem; max-width:560px; line-height:1.8; }
+
+  .form-section{ padding-bottom:120px; }
+  .form-wrap{ max-width:640px; margin:0 auto; }
+  .form-card{ background:var(--white); border:1px solid var(--line); border-radius:24px; padding:44px 40px; }
+  .field{ margin-bottom:22px; }
+  .field label{ display:block; font-size:.84rem; font-weight:600; color:var(--ink); margin-bottom:8px; }
+  .field input, .field textarea{
+    width:100%; padding:13px 16px; border:1px solid var(--line); border-radius:12px;
+    font-size:.94rem; font-family:var(--font-body); transition:border-color .25s ease;
+  }
+  .field input:focus, .field textarea:focus{ outline:none; border-color:var(--teal); }
+  .field textarea{ resize:vertical; }
+  .hp-field{ position:absolute; left:-9999px; opacity:0; }
+  .submit-btn{
+    width:100%; padding:15px; border:none; border-radius:99px; background:var(--abyss);
+    color:var(--white); font-weight:600; font-size:.95rem; cursor:pointer;
+    position:relative; overflow:hidden;
+    transition:background .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
+  }
+  .submit-btn:hover{ background:var(--teal-deep); transform:translateY(-2px); }
+  .submit-btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+
+  .form-msg{ margin-top:16px; font-size:.86rem; padding:14px 16px; border-radius:10px; display:none; }
+  .form-msg.success{ display:block; background:rgba(14,124,134,.1); color:var(--teal-deep); }
+  .form-msg.error{ display:block; background:rgba(192,57,43,.08); color:var(--red); }
+
+  .alt-contact{ text-align:center; margin-top:28px; font-size:.88rem; color:var(--slate); }
+  .alt-contact a{ color:var(--teal-deep); font-weight:600; }
+
+  .footer{ background:var(--abyss); border-top:1px solid rgba(255,255,255,.08); padding:36px 0; }
+  .footer__inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer__logo{ font-family:var(--font-mono); font-size:.82rem; color:rgba(255,255,255,.5); }
+  .footer__links{ display:flex; gap:24px; }
+  .footer__links a{ font-size:.8rem; color:rgba(255,255,255,.45); transition:color .2s; }
+  .footer__links a:hover{ color:var(--white); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav__inner">
+    <a href="index.html" class="nav__logo"><span class="dot"></span>GROWTHDIVER</a>
+    <div class="nav__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+      <a href="contact.html" class="nav__cta">문의하기</a>
+    </div>
+    <button class="nav__burger">MENU</button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="section__eyebrow">Contact</p>
+    <h1 class="page-hero__title">더 깊이 들어가 볼까요?</h1>
+    <p class="page-hero__desc">프로젝트 내용을 간단히 남겨주시면, 확인 후 빠르게 답변드립니다.</p>
+  </div>
+</header>
+
+<section class="form-section">
+  <div class="wrap">
+    <div class="form-wrap">
+      <div class="form-card">
+        <form id="contactForm">
+          <div class="field">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="field">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field">
+            <label for="message">문의 내용</label>
+            <textarea id="message" name="message" rows="6" placeholder="어떤 프로젝트인지, 무엇을 도와드리면 좋을지 알려주세요." required></textarea>
+          </div>
+          <!-- 허니팟: 스팸봇 방지용, 사람에게는 보이지 않음 -->
+          <input type="text" id="website" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+
+          <button type="submit" class="submit-btn" id="submitBtn">문의 보내기</button>
+          <div class="form-msg" id="formMsg"></div>
+        </form>
+      </div>
+
+      <p class="alt-contact">폼이 불편하시면 이메일로도 연락 주세요 — <a href="mailto:twa03165@gmail.com">twa03165@gmail.com</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('formMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = '보내는 중...';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+
+    const body = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      message: document.getElementById('message').value.trim(),
+      website: document.getElementById('website').value, // honeypot
+    };
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        msg.className = 'form-msg success';
+        msg.textContent = '문의가 전달되었습니다. 빠르게 답변드리겠습니다.';
+        form.reset();
+      } else {
+        msg.className = 'form-msg error';
+        msg.textContent = data.error || '전송에 실패했습니다. 잠시 후 다시 시도해주세요.';
+      }
+    } catch (err) {
+      msg.className = 'form-msg error';
+      msg.textContent = '전송 중 오류가 발생했습니다. 이메일로 연락 부탁드립니다.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '문의 보내기';
+    }
+  });
+</script>
+
+</body>
+</html>

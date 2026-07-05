@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>소개 — GrowthDiver | 신희정</title>
+<meta name="description" content="데이터로 성과를 개선하고, AI로 실험하는 그로스 마케터 신희정을 소개합니다. 커리어, 철학, 스킬셋.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://growthdiver.kr/about.html">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:        #F5F7F8;
+    --bg-soft:   #ECF1F2;
+    --abyss:     #0B1626;
+    --abyss-2:   #102338;
+    --ink:       #0B1626;
+    --teal:      #0E7C86;
+    --teal-deep: #0A5A62;
+    --amber:     #F2A65A;
+    --slate:     #64707C;
+    --line:      #DEE4E7;
+    --white:     #FFFFFF;
+
+    --font-display: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-body: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    font-family:var(--font-body);
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  /* ───────── NAV (shared) ───────── */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    padding:22px 0;
+    background:rgba(245,247,248,.88);
+    backdrop-filter:blur(10px);
+    box-shadow:0 1px 0 var(--line);
+  }
+  .nav__inner{ display:flex; align-items:center; justify-content:space-between; }
+  .nav__logo{
+    font-family:var(--font-mono);
+    font-weight:600; font-size:.95rem; letter-spacing:.02em;
+    color:var(--abyss);
+    display:flex; align-items:center; gap:8px;
+  }
+  .nav__logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 3px rgba(14,124,134,.15); }
+  .nav__links{ display:flex; gap:2.5rem; align-items:center; }
+  .nav__links a{
+    font-size:.88rem; font-weight:500; color:var(--slate);
+    position:relative; padding:4px 0; display:inline-block;
+    transition:color .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1);
+  }
+  .nav__links a::after{
+    content:''; position:absolute; left:0; bottom:-2px; width:100%; height:1.5px;
+    background:var(--teal); transform:scaleX(0); transform-origin:left;
+    transition:transform .4s cubic-bezier(.16,1,.3,1);
+  }
+  .nav__links a:hover{ color:var(--ink); transform:translateY(-1px); }
+  .nav__links a:hover::after{ transform:scaleX(1); }
+  .nav__links a.active{ color:var(--teal-deep); font-weight:600; }
+  .nav__links a.active::after{ transform:scaleX(1); }
+  .nav__cta{
+    font-size:.85rem; font-weight:600; color:var(--white) !important;
+    background:var(--abyss); padding:14px 40px; border-radius:99px;
+    white-space:nowrap; position:relative; overflow:hidden;
+    transition:background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1);
+  }
+  .nav__cta::before{
+    content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+    transform:skewX(-20deg); transition:left .7s ease;
+  }
+  .nav__cta:hover::before{ left:140%; }
+  .nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
+  .nav__cta::after{ display:none; }
+  .nav__burger{ display:none; }
+  @media (max-width:860px){
+    .nav__links{ display:none; }
+    .nav__burger{ display:block; font-family:var(--font-mono); font-size:.8rem; color:var(--ink); background:none; border:1px solid var(--line); padding:8px 14px; border-radius:99px; }
+  }
+
+  /* ───────── PAGE HERO ───────── */
+  .page-hero{
+    padding:180px 0 90px;
+    background:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(14,124,134,.10), transparent 60%);
+  }
+  .section__eyebrow{
+    font-family:var(--font-mono); font-size:.72rem; font-weight:500;
+    color:var(--teal-deep); letter-spacing:.1em; text-transform:uppercase;
+    margin-bottom:16px; display:flex; align-items:center; gap:10px;
+  }
+  .section__eyebrow::before{ content:''; width:20px; height:1px; background:var(--teal); }
+  .page-hero__title{
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(2.2rem, 5vw, 3.4rem); letter-spacing:-.02em; line-height:1.2;
+    max-width:720px; margin-bottom:24px;
+  }
+  .page-hero__desc{ color:var(--slate); font-size:1.08rem; max-width:600px; line-height:1.8; }
+  .page-hero__desc strong{ color:var(--ink); font-weight:600; }
+
+  section{ padding:100px 0; }
+  .section__title{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(1.7rem, 3vw, 2.3rem); letter-spacing:-.015em;
+    color:var(--ink); margin-bottom:20px; max-width:640px;
+  }
+
+  /* ───────── PROFILE CARD ───────── */
+  .profile{ background:var(--bg-soft); }
+  .profile__grid{ display:grid; grid-template-columns:1fr 1.4fr; gap:48px; align-items:start; margin-top:48px; }
+  .profile__card{
+    background:var(--white); border:1px solid var(--line); border-radius:24px;
+    padding:40px 34px;
+  }
+  .profile__name{ font-family:var(--font-display); font-weight:800; font-size:1.6rem; margin-bottom:6px; }
+  .profile__role{ color:var(--teal-deep); font-weight:600; font-size:.92rem; margin-bottom:24px; }
+  .profile__meta{ display:flex; flex-direction:column; gap:12px; }
+  .profile__meta-row{ display:flex; gap:14px; font-size:.86rem; }
+  .profile__meta-label{ color:var(--slate); min-width:70px; font-family:var(--font-mono); font-size:.78rem; }
+  .profile__meta-value{ color:var(--ink); font-weight:500; }
+  .profile__quote{
+    font-family:var(--font-display); font-weight:700; font-size:1.3rem; line-height:1.6;
+    color:var(--ink); letter-spacing:-.01em;
+  }
+  .profile__quote .accent{ color:var(--teal-deep); }
+  .profile__body{ color:var(--slate); font-size:.98rem; line-height:1.85; margin-top:24px; }
+
+  /* ───────── TIMELINE (dive log style) ───────── */
+  .timeline{ margin-top:56px; position:relative; }
+  .timeline::before{
+    content:''; position:absolute; left:11px; top:8px; bottom:8px; width:2px;
+    background:linear-gradient(180deg, var(--teal), var(--line));
+  }
+  .timeline__item{ position:relative; padding-left:44px; padding-bottom:44px; }
+  .timeline__item:last-child{ padding-bottom:0; }
+  .timeline__dot{
+    position:absolute; left:0; top:2px; width:24px; height:24px; border-radius:50%;
+    background:var(--white); border:2px solid var(--teal);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .timeline__dot::after{ content:''; width:8px; height:8px; border-radius:50%; background:var(--teal); }
+  .timeline__period{ font-family:var(--font-mono); font-size:.76rem; color:var(--teal-deep); font-weight:600; margin-bottom:6px; }
+  .timeline__title{ font-weight:700; font-size:1.05rem; margin-bottom:6px; color:var(--ink); }
+  .timeline__desc{ font-size:.88rem; color:var(--slate); line-height:1.7; }
+
+  /* ───────── SKILLS ───────── */
+  .skills__group{ margin-bottom:40px; }
+  .skills__group:last-child{ margin-bottom:0; }
+  .skills__label{
+    font-family:var(--font-mono); font-size:.74rem; font-weight:600; color:var(--slate);
+    letter-spacing:.06em; text-transform:uppercase; margin-bottom:16px;
+  }
+  .skills__tags{ display:flex; flex-wrap:wrap; gap:10px; }
+  .skill-tag{
+    font-size:.86rem; font-weight:500; color:var(--ink);
+    background:var(--white); border:1px solid var(--line); border-radius:99px;
+    padding:9px 18px;
+    transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1), border-color .35s ease, background .35s ease;
+  }
+  .skill-tag:hover{ transform:translateY(-3px); box-shadow:0 10px 20px rgba(11,22,38,.08); border-color:transparent; background:var(--teal); color:var(--white); }
+  .skill-tag--ai{ background:var(--abyss); color:var(--white); border-color:var(--abyss); }
+  .skill-tag--ai:hover{ background:var(--teal-deep); }
+
+  /* ───────── CONTACT ───────── */
+  .contact{ background:var(--abyss); color:var(--white); text-align:center; padding:130px 0 90px; }
+  .contact__title{
+    font-family:var(--font-display); font-weight:800;
+    font-size:clamp(2rem, 4.6vw, 3rem); letter-spacing:-.02em; margin-bottom:22px;
+  }
+  .contact__title .accent{ color:var(--amber); }
+  .contact__desc{ color:rgba(255,255,255,.65); font-size:1.02rem; margin-bottom:40px; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.92rem; font-weight:600; padding:14px 28px; border-radius:99px;
+    position:relative; overflow:hidden;
+    transition:transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), background .35s ease;
+  }
+  .btn::before{
+    content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent);
+    transform:skewX(-20deg); transition:left .7s ease;
+  }
+  .btn:hover::before{ left:140%; }
+  .btn--primary{ background:var(--teal); color:var(--white); }
+  .btn--primary:hover{ background:#5FC3CC; color:var(--abyss); transform:translateY(-3px) scale(1.02); box-shadow:0 16px 32px rgba(0,0,0,.24); }
+
+  .footer{ background:var(--abyss); border-top:1px solid rgba(255,255,255,.08); padding:36px 0; }
+  .footer__inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer__logo{ font-family:var(--font-mono); font-size:.82rem; color:rgba(255,255,255,.5); }
+  .footer__links{ display:flex; gap:24px; }
+  .footer__links a{ font-size:.8rem; color:rgba(255,255,255,.45); transition:color .2s; }
+  .footer__links a:hover{ color:var(--white); }
+
+  .reveal{
+    opacity:0; transform:translateY(36px) scale(.97); filter:blur(6px);
+    transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.in{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+
+  @media (max-width:900px){
+    .profile__grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav__inner">
+    <a href="index.html" class="nav__logo"><span class="dot"></span>GROWTHDIVER</a>
+    <div class="nav__links">
+      <a href="index.html">메인</a>
+      <a href="about.html" class="active">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+      <a href="contact.html" class="nav__cta">문의하기</a>
+    </div>
+    <button class="nav__burger">MENU</button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="section__eyebrow">About</p>
+    <h1 class="page-hero__title">얕은 마케팅은 하지 않는<br>그로스 마케터, 신희정</h1>
+    <p class="page-hero__desc">
+      <strong>데이터로 성과를 개선하고, AI로 실험하며, 결과로 증명합니다.</strong>
+      퍼포먼스·콘텐츠·커뮤니티·CRM 전 영역을 직접 실행해온 실무 경험에,
+      AI를 활용한 자동화와 GEO 실험을 더해 마케팅을 새로운 방식으로 설계합니다.
+    </p>
+  </div>
+</header>
+
+<section class="profile">
+  <div class="wrap">
+    <div class="profile__grid">
+      <div class="profile__card reveal">
+        <div class="profile__name">신희정</div>
+        <div class="profile__role">Growth Marketer · AI Native</div>
+        <div class="profile__meta">
+          <div class="profile__meta-row">
+            <span class="profile__meta-label">E-MAIL</span>
+            <span class="profile__meta-value">twa03165@gmail.com</span>
+          </div>
+          <div class="profile__meta-row">
+            <span class="profile__meta-label">INSTAGRAM</span>
+            <span class="profile__meta-value">@_hheeee</span>
+          </div>
+          <div class="profile__meta-row">
+            <span class="profile__meta-label">BASE</span>
+            <span class="profile__meta-value">대구, 대한민국</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <p class="profile__quote">
+          "표면적인 지표에 만족하지 않습니다.<br>
+          <span class="accent">숫자 뒤에 있는 진짜 이유</span>를 찾을 때까지 파고듭니다."
+        </p>
+        <p class="profile__body">
+          제로베이스 콘텐츠 마케팅 스쿨과 대구디지털산업진흥원 글로벌마케터 과정을 거쳐
+          퍼포먼스·CRM·콘텐츠·커뮤니티·PM까지 마케팅의 전 영역을 직접 실행해왔습니다.
+          최근에는 AI를 활용해 앱을 직접 만들고, 광고비 없이 AI 검색 노출을 설계하는
+          GEO 실험을 진행하며 마케팅의 다음 방식을 탐구하고 있습니다.
+          화면 추적 데이터와 서버 로그를 교차 분석해 CPA를 83% 절감하고,
+          로컬 타겟 콘텐츠 기획으로 팔로워를 5,900% 성장시킨 경험이 있습니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="wrap">
+    <p class="section__eyebrow">Career</p>
+    <h2 class="section__title">직접 실행하며 쌓아온 경력</h2>
+
+    <div class="timeline">
+      <div class="timeline__item reveal">
+        <div class="timeline__dot"></div>
+        <div class="timeline__period">2025.10 — 2026.04</div>
+        <div class="timeline__title">드림아이디어소프트 · 온라인 마케팅 / 커뮤니티 관리</div>
+        <div class="timeline__desc">북미 유저 획득 캠페인 최적화로 CPA 83% 절감. 글로벌 디스코드 커뮤니티 3,600명 규모 운영 및 활성화.</div>
+      </div>
+      <div class="timeline__item reveal">
+        <div class="timeline__dot"></div>
+        <div class="timeline__period">2023.05 — 2024.12</div>
+        <div class="timeline__title">러플(LUPL) · 온라인 마케팅 / 프로젝트 기획</div>
+        <div class="timeline__desc">로컬 특화 콘텐츠 기획으로 인스타그램 팔로워 5,900% 성장. 24FW 인클루시브 패션 프로젝트 PM으로 크라우드 펀딩 2,000% 초과 달성.</div>
+      </div>
+      <div class="timeline__item reveal">
+        <div class="timeline__dot"></div>
+        <div class="timeline__period">2022.11 — 2023.05</div>
+        <div class="timeline__title">한국비즈커넥트 · 온라인 마케팅 / CRM 마케팅</div>
+        <div class="timeline__desc">공공기관 지원사업 알림 메시지 타겟팅 정교화로 채널 차단율 방어 및 참여 전환율 개선.</div>
+      </div>
+      <div class="timeline__item reveal">
+        <div class="timeline__dot"></div>
+        <div class="timeline__period">2022.07 — 2022.10</div>
+        <div class="timeline__title">제로베이스 콘텐츠 마케팅 스쿨 · 대구디지털산업진흥원 글로벌마케터 과정</div>
+        <div class="timeline__desc">콘텐츠 마케팅 실무와 글로벌 마케팅 역량을 병행 학습.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="profile" id="skills">
+  <div class="wrap">
+    <p class="section__eyebrow">Skills & Tools</p>
+    <h2 class="section__title">마케팅 실무 역량 + AI 활용 역량</h2>
+
+    <div style="margin-top:48px">
+      <div class="skills__group reveal">
+        <div class="skills__label">Marketing Skills</div>
+        <div class="skills__tags">
+          <span class="skill-tag">퍼포먼스 마케팅</span>
+          <span class="skill-tag">데이터 분석</span>
+          <span class="skill-tag">콘텐츠 기획</span>
+          <span class="skill-tag">커뮤니티 운영</span>
+          <span class="skill-tag">인플루언서 협업</span>
+          <span class="skill-tag">프로젝트 PM</span>
+          <span class="skill-tag">CRM 마케팅</span>
+        </div>
+      </div>
+
+      <div class="skills__group reveal">
+        <div class="skills__label">AI Skills</div>
+        <div class="skills__tags">
+          <span class="skill-tag skill-tag--ai">GEO 최적화</span>
+          <span class="skill-tag skill-tag--ai">AI 프롬프트 엔지니어링</span>
+          <span class="skill-tag skill-tag--ai">AI 자동화 설계</span>
+          <span class="skill-tag skill-tag--ai">바이브코딩</span>
+          <span class="skill-tag skill-tag--ai">AI 콘텐츠 제작</span>
+        </div>
+      </div>
+
+      <div class="skills__group reveal">
+        <div class="skills__label">Tools</div>
+        <div class="skills__tags">
+          <span class="skill-tag">Google Ads</span>
+          <span class="skill-tag">GA4</span>
+          <span class="skill-tag">Meta Ads</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Photoshop</span>
+          <span class="skill-tag">Illustrator</span>
+          <span class="skill-tag">Claude</span>
+          <span class="skill-tag">ChatGPT</span>
+          <span class="skill-tag">Gemini</span>
+          <span class="skill-tag">Grok</span>
+          <span class="skill-tag">Perplexity</span>
+          <span class="skill-tag">GitHub Actions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="contact__title">함께 실험해볼<span class="accent"> 준비</span>가 되셨나요?</h2>
+    <p class="contact__desc">데이터와 AI로 성장을 설계하는 이야기를 지금 시작하세요.</p>
+    <a href="contact.html" class="btn btn--primary">문의하기</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold:0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

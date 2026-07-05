@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>포트폴리오 — GrowthDiver | 신희정</title>
+<meta name="description" content="AI 실험과 마케팅 커리어를 통해 만든 결과들. Blindex GEO 실험부터 CPA 83% 절감까지, 신희정의 포트폴리오.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://growthdiver.kr/portfolio.html">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F5F7F8; --bg-soft:#ECF1F2; --abyss:#0B1626; --teal-deep2:#102338; --ink:#0B1626;
+    --teal:#0E7C86; --teal-deep:#0A5A62; --amber:#F2A65A; --slate:#64707C;
+    --line:#DEE4E7; --white:#FFFFFF;
+    --font-display:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-body:'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  body{ font-family:var(--font-body); background:var(--bg); color:var(--ink); line-height:1.65; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+  .nav{ position:fixed; top:0; left:0; right:0; z-index:200; padding:22px 0;
+    background:rgba(245,247,248,.88); backdrop-filter:blur(10px); box-shadow:0 1px 0 var(--line); }
+  .nav__inner{ display:flex; align-items:center; justify-content:space-between; }
+  .nav__logo{ font-family:var(--font-mono); font-weight:600; font-size:.95rem; color:var(--abyss); display:flex; align-items:center; gap:8px; }
+  .nav__logo .dot{ width:8px; height:8px; border-radius:50%; background:var(--teal); box-shadow:0 0 0 3px rgba(14,124,134,.15); }
+  .nav__links{ display:flex; gap:2.5rem; align-items:center; }
+  .nav__links a{ font-size:.88rem; font-weight:500; color:var(--slate); position:relative; padding:4px 0; display:inline-block;
+    transition:color .3s cubic-bezier(.16,1,.3,1), transform .3s cubic-bezier(.16,1,.3,1); }
+  .nav__links a::after{ content:''; position:absolute; left:0; bottom:-2px; width:100%; height:1.5px; background:var(--teal);
+    transform:scaleX(0); transform-origin:left; transition:transform .4s cubic-bezier(.16,1,.3,1); }
+  .nav__links a:hover{ color:var(--ink); transform:translateY(-1px); }
+  .nav__links a:hover::after{ transform:scaleX(1); }
+  .nav__links a.active{ color:var(--teal-deep); font-weight:600; }
+  .nav__links a.active::after{ transform:scaleX(1); }
+  .nav__cta{ font-size:.85rem; font-weight:600; color:var(--white) !important; background:var(--abyss); padding:14px 40px;
+    border-radius:99px; white-space:nowrap; position:relative; overflow:hidden;
+    transition:background .35s cubic-bezier(.16,1,.3,1), transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s cubic-bezier(.16,1,.3,1); }
+  .nav__cta::before{ content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent); transform:skewX(-20deg); transition:left .7s ease; }
+  .nav__cta:hover::before{ left:140%; }
+  .nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
+  .nav__cta::after{ display:none; }
+  .nav__burger{ display:none; }
+  @media (max-width:860px){ .nav__links{ display:none; } .nav__burger{ display:block; font-family:var(--font-mono); font-size:.8rem; color:var(--ink); background:none; border:1px solid var(--line); padding:8px 14px; border-radius:99px; } }
+
+  .page-hero{ padding:180px 0 70px; background:radial-gradient(ellipse 900px 500px at 85% -10%, rgba(14,124,134,.10), transparent 60%); }
+  .section__eyebrow{ font-family:var(--font-mono); font-size:.72rem; font-weight:500; color:var(--teal-deep);
+    letter-spacing:.1em; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+  .section__eyebrow::before{ content:''; width:20px; height:1px; background:var(--teal); }
+  .page-hero__title{ font-family:var(--font-display); font-weight:800; font-size:clamp(2.2rem,5vw,3.4rem);
+    letter-spacing:-.02em; line-height:1.2; max-width:760px; margin-bottom:20px; }
+  .page-hero__desc{ color:var(--slate); font-size:1.05rem; max-width:600px; line-height:1.8; }
+
+  section{ padding-bottom:100px; }
+  .section__title{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.6rem,2.8vw,2.1rem);
+    letter-spacing:-.015em; color:var(--ink); margin-bottom:8px; }
+
+  .filters{ display:flex; gap:10px; margin:44px 0 8px; flex-wrap:wrap; }
+  .filter-tab{ font-family:var(--font-mono); font-size:.78rem; font-weight:500; color:var(--slate);
+    background:var(--white); border:1px solid var(--line); border-radius:99px; padding:9px 20px;
+    cursor:pointer; transition:all .3s cubic-bezier(.16,1,.3,1); }
+  .filter-tab:hover{ border-color:var(--teal); color:var(--teal-deep); transform:translateY(-2px); }
+  .filter-tab.active{ background:var(--abyss); color:var(--white); border-color:var(--abyss); }
+
+  /* project rows */
+  .projects{ margin-top:20px; }
+  .project{
+    display:grid; grid-template-columns:60px 1fr 200px; gap:28px; align-items:start;
+    padding:34px 0; border-bottom:1px solid var(--line);
+    transition:transform .5s cubic-bezier(.16,1,.3,1), padding .4s ease;
+  }
+  .project:first-child{ border-top:1px solid var(--line); }
+  .project:hover{ transform:translateX(6px); }
+  .project__num{ font-family:var(--font-mono); font-size:.85rem; color:var(--line); font-weight:600; padding-top:4px; }
+  .project__tag{
+    display:inline-block; font-family:var(--font-mono); font-size:.68rem; font-weight:600; color:var(--teal-deep);
+    background:rgba(14,124,134,.09); padding:5px 12px; border-radius:99px; margin-bottom:12px;
+  }
+  .project__title{ font-weight:700; font-size:1.15rem; margin-bottom:10px; color:var(--ink); }
+  .project__desc{ font-size:.92rem; color:var(--slate); line-height:1.75; max-width:620px; }
+  .project__stat{ text-align:right; }
+  .project__stat-value{ font-family:var(--font-mono); font-weight:600; font-size:1.5rem; color:var(--teal-deep); margin-bottom:4px; }
+  .project__stat-label{ font-size:.76rem; color:var(--slate); }
+  @media (max-width:760px){
+    .project{ grid-template-columns:40px 1fr; }
+    .project__stat{ grid-column:2; text-align:left; margin-top:14px; }
+  }
+
+  /* featured case (blindex) */
+  .featured{ background:var(--bg-soft); }
+  .case__card{
+    display:grid; grid-template-columns:1.1fr 1fr; gap:0;
+    background:var(--white); border:1px solid var(--line); border-radius:24px;
+    overflow:hidden; margin-top:48px;
+    transition:transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s cubic-bezier(.16,1,.3,1);
+  }
+  .case__card:hover{ transform:translateY(-6px); box-shadow:0 28px 56px rgba(11,22,38,.12); }
+  .case__content{ padding:52px 48px; }
+  .case__tag{ display:inline-block; font-family:var(--font-mono); font-size:.7rem; font-weight:600;
+    color:var(--teal-deep); background:rgba(14,124,134,.09); padding:6px 14px; border-radius:99px; margin-bottom:20px; }
+  .case__title{ font-family:var(--font-display); font-weight:700; font-size:1.5rem; margin-bottom:14px; color:var(--ink); }
+  .case__desc{ color:var(--slate); font-size:.94rem; line-height:1.75; margin-bottom:28px; }
+  .case__stats{ display:flex; gap:28px; margin-bottom:28px; }
+  .case__stat-value{ font-family:var(--font-mono); font-weight:600; font-size:1.3rem; color:var(--teal-deep); }
+  .case__stat-label{ font-size:.76rem; color:var(--slate); margin-top:4px; }
+  .case__visual{ background:linear-gradient(160deg, var(--abyss), var(--teal-deep));
+    display:flex; align-items:center; justify-content:center; padding:40px; position:relative; overflow:hidden; }
+  .case__visual::before{ content:''; position:absolute; inset:0;
+    background:repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(255,255,255,.04) 39px); }
+  .case__visual-inner{ position:relative; z-index:2; text-align:center; color:rgba(255,255,255,.85);
+    font-family:var(--font-mono); font-size:.8rem; line-height:1.8; }
+  .case__visual-inner .big{ font-size:2.2rem; font-weight:600; color:#5FC3CC; display:block; margin-bottom:6px; }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-size:.92rem; font-weight:600; padding:14px 28px; border-radius:99px;
+    position:relative; overflow:hidden; transition:transform .45s cubic-bezier(.16,1,.3,1), box-shadow .45s cubic-bezier(.16,1,.3,1), background .35s ease, border-color .35s ease, color .35s ease; }
+  .btn::before{ content:''; position:absolute; top:0; left:-130%; width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.3), transparent); transform:skewX(-20deg); transition:left .7s ease; }
+  .btn:hover::before{ left:140%; }
+  .btn--primary{ background:var(--teal); color:var(--white); }
+  .btn--primary:hover{ background:#5FC3CC; color:var(--abyss); transform:translateY(-3px) scale(1.02); box-shadow:0 16px 32px rgba(0,0,0,.24); }
+  .btn--ghost{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .btn--ghost:hover{ border-color:var(--teal); color:var(--teal-deep); transform:translateY(-3px); }
+  @media (max-width:860px){ .case__card{ grid-template-columns:1fr; } .case__content{ padding:36px 28px; } }
+
+  .contact{ background:var(--abyss); color:var(--white); text-align:center; padding:130px 0 90px; }
+  .contact__title{ font-family:var(--font-display); font-weight:800; font-size:clamp(2rem,4.6vw,3rem); letter-spacing:-.02em; margin-bottom:22px; }
+  .contact__title .accent{ color:var(--amber); }
+  .contact__desc{ color:rgba(255,255,255,.65); font-size:1.02rem; margin-bottom:40px; }
+  .contact .btn--primary{ background:var(--teal); }
+
+  .footer{ background:var(--abyss); border-top:1px solid rgba(255,255,255,.08); padding:36px 0; }
+  .footer__inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer__logo{ font-family:var(--font-mono); font-size:.82rem; color:rgba(255,255,255,.5); }
+  .footer__links{ display:flex; gap:24px; }
+  .footer__links a{ font-size:.8rem; color:rgba(255,255,255,.45); transition:color .2s; }
+  .footer__links a:hover{ color:var(--white); }
+
+  .reveal{ opacity:0; transform:translateY(30px) scale(.98); filter:blur(5px);
+    transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav__inner">
+    <a href="index.html" class="nav__logo"><span class="dot"></span>GROWTHDIVER</a>
+    <div class="nav__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html" class="active">포트폴리오</a>
+      <a href="contact.html" class="nav__cta">문의하기</a>
+    </div>
+    <button class="nav__burger">MENU</button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="section__eyebrow">Portfolio</p>
+    <h1 class="page-hero__title">실험으로 증명한<br>결과들</h1>
+    <p class="page-hero__desc">AI를 활용한 그로스 실험부터 실무에서 만든 마케팅 성과까지, 직접 실행한 프로젝트만 담았습니다.</p>
+  </div>
+</header>
+
+<!-- Featured: Blindex GEO -->
+<section class="featured">
+  <div class="wrap">
+    <p class="section__eyebrow">Featured · 진행 중</p>
+    <h2 class="section__title">Blindex GEO 실험</h2>
+    <div class="case__card reveal">
+      <div class="case__content">
+        <span class="case__tag">GEO EXPERIMENT · 진행 중</span>
+        <h3 class="case__title">AI 검색에 앱을 노출시키는 실험</h3>
+        <p class="case__desc">
+          Claude로 직접 만든 Android 카드게임 Blindex를 대상으로 광고비 $0 원칙 아래
+          랜딩페이지 GEO 최적화, robots.txt / JSON-LD 스키마 설계, 5개 AI 모델 자동 추적
+          대시보드 구축까지 전 과정을 직접 설계하고 매일 결과를 기록합니다.
+        </p>
+        <div class="case__stats">
+          <div><div class="case__stat-value">5개</div><div class="case__stat-label">추적 AI 모델</div></div>
+          <div><div class="case__stat-value" data-geo="day">2일차</div><div class="case__stat-label">실험 진행 일수</div></div>
+          <div><div class="case__stat-value" data-geo="mentions">2/30</div><div class="case__stat-label">오늘 언급 횟수</div></div>
+        </div>
+        <a href="https://blindex.app" target="_blank" rel="noopener" class="btn btn--ghost">blindex.app 방문 →</a>
+      </div>
+      <div class="case__visual">
+        <div class="case__visual-inner">
+          <span class="big" data-geo="ais">GEMINI · GROK</span>
+          <span data-geo="date">실험 2일차 첫 언급 확인</span><br>매일 자동 추적 중
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- All projects -->
+<section>
+  <div class="wrap">
+    <p class="section__eyebrow">All Projects</p>
+    <h2 class="section__title">AI 실험 & 마케팅 커리어</h2>
+
+    <div class="filters">
+      <button class="filter-tab active" data-filter="all">전체</button>
+      <button class="filter-tab" data-filter="ai">AI × 그로스 실험</button>
+      <button class="filter-tab" data-filter="career">마케팅 커리어</button>
+    </div>
+
+    <div class="projects" id="projectGrid">
+
+      <div class="project reveal" data-cat="ai">
+        <div class="project__num">01</div>
+        <div>
+          <span class="project__tag">AI × GEO</span>
+          <div class="project__title">Blindex GEO 실험 — AI 검색 노출 자동화</div>
+          <div class="project__desc">GitHub Actions + 5개 AI API를 연동해 매일 30회 자동으로 AI 검색 언급을 추적하는 시스템을 설계·구축.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">$0</div>
+          <div class="project__stat-label">광고비</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="ai">
+        <div class="project__num">02</div>
+        <div>
+          <span class="project__tag">바이브코딩</span>
+          <div class="project__title">바이브코딩으로 Android 앱 출시</div>
+          <div class="project__desc">코딩 경험 없이 Claude Code와의 대화만으로 카드게임 앱을 개발하고 Google Play에 정식 출시.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">2,664줄</div>
+          <div class="project__stat-label">단일 파일 구현</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="ai">
+        <div class="project__num">03</div>
+        <div>
+          <span class="project__tag">AI 자동화</span>
+          <div class="project__title">GEO 자동화 대시보드 설계 및 구축</div>
+          <div class="project__desc">5개 AI 모델의 검색 응답을 매일 자동 수집·분석·시각화. Puppeteer 자동 스크린샷까지 완전 자동화.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">100%</div>
+          <div class="project__stat-label">자동화 운영</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">04</div>
+        <div>
+          <span class="project__tag">퍼포먼스 마케팅</span>
+          <div class="project__title">행동 데이터 기반 CPA 절감 (드림아이디어소프트)</div>
+          <div class="project__desc">Clarity 화면 추적과 서버 로그 교차 분석으로 이탈 원인을 진단하고 매체를 전환해 획득 단가 절감.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">−83%</div>
+          <div class="project__stat-label">CPA 절감</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">05</div>
+        <div>
+          <span class="project__tag">콘텐츠 마케팅</span>
+          <div class="project__title">로컬 콘텐츠 기획 및 SNS 채널 성장 (러플)</div>
+          <div class="project__desc">대구 지역 타겟이 필요로 하는 로컬 특화 콘텐츠를 기획해 자발적 확산을 유도.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">+5,900%</div>
+          <div class="project__stat-label">팔로워 성장</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">06</div>
+        <div>
+          <span class="project__tag">프로젝트 PM</span>
+          <div class="project__title">24FW 인클루시브 패션 프로젝트 PM (러플)</div>
+          <div class="project__desc">디자이너 부재 상황에서 산학 협력을 직접 기획해 리소스를 확보하고 펀딩을 총괄.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">2,000%</div>
+          <div class="project__stat-label">펀딩 초과 달성</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">07</div>
+        <div>
+          <span class="project__tag">인플루언서 마케팅</span>
+          <div class="project__title">스팀 상점 최적화 및 유튜버 협업 (드림아이디어소프트)</div>
+          <div class="project__desc">타겟 일치도 높은 북미 유튜버 섭외 및 스팀 상점 알고리즘 최적화로 오가닉 유입 견인.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">UTM</div>
+          <div class="project__stat-label">교차 검증 트래킹</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">08</div>
+        <div>
+          <span class="project__tag">커뮤니티 운영</span>
+          <div class="project__title">로컬 · 글로벌 커뮤니티 구축 (러플 / 드림아이디어소프트)</div>
+          <div class="project__desc">카카오톡 오픈채팅방과 디스코드 봇 자동화로 로컬·글로벌 양쪽에서 활성 커뮤니티 조성.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">3,600명</div>
+          <div class="project__stat-label">글로벌 커뮤니티</div>
+        </div>
+      </div>
+
+      <div class="project reveal" data-cat="career">
+        <div class="project__num">09</div>
+        <div>
+          <span class="project__tag">CRM 마케팅</span>
+          <div class="project__title">타겟 맞춤 CRM 시나리오 설계 (한국비즈커넥트)</div>
+          <div class="project__desc">정밀 타겟 선별과 소재 최적화로 카카오톡 채널 차단율을 방어하고 전환율을 개선.</div>
+        </div>
+        <div class="project__stat">
+          <div class="project__stat-value">▲</div>
+          <div class="project__stat-label">전환율 개선</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <h2 class="contact__title">다음 실험을 <span class="accent">함께</span> 하고 싶다면</h2>
+    <p class="contact__desc">데이터와 AI로 증명하는 마케팅, 지금 이야기를 시작하세요.</p>
+    <a href="contact.html" class="btn btn--primary">문의하기</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__links">
+      <a href="index.html">메인</a>
+      <a href="about.html">소개</a>
+      <a href="blog.html">블로그</a>
+      <a href="portfolio.html">포트폴리오</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.filter-tab');
+  const items = document.querySelectorAll('#projectGrid .project');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      items.forEach(item => {
+        const show = filter === 'all' || item.dataset.cat === filter;
+        item.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold:0.1 });
+  revealEls.forEach(el => io.observe(el));
+
+  // ── Live GEO stats ──
+  (async function loadGeoStats(){
+    const BASE = 'https://deepsleepdiver-lab.github.io/blindex-geo';
+    const NAME_MAP = { chatgpt:'ChatGPT', claude:'Claude', gemini:'Gemini', perplexity:'Perplexity', grok:'Grok' };
+    try {
+      const [idxRes, latestRes] = await Promise.all([
+        fetch(`${BASE}/data/index.json?t=${Date.now()}`),
+        fetch(`${BASE}/data/latest.json?t=${Date.now()}`)
+      ]);
+      if (!idxRes.ok || !latestRes.ok) return;
+      const idx = await idxRes.json();
+      const latest = await latestRes.json();
+
+      const aiIds = Object.keys(latest.results || {});
+      if (!aiIds.length) return;
+      const queries = Object.keys(latest.results[aiIds[0]].queries || {});
+      const totalSlots = aiIds.length * queries.length;
+
+      let mentioned = 0;
+      const mentionedAIs = [];
+      aiIds.forEach(ai => {
+        let hit = false;
+        queries.forEach(q => {
+          if (latest.results[ai]?.queries?.[q]?.mentioned) { mentioned++; hit = true; }
+        });
+        if (hit) mentionedAIs.push(NAME_MAP[ai] || ai);
+      });
+
+      const dayCount = idx.length;
+      const aiLabel = mentionedAIs.length ? mentionedAIs.join(' · ') : '아직 없음';
+
+      document.querySelectorAll('[data-geo="day"]').forEach(el => el.textContent = `${dayCount}일차`);
+      document.querySelectorAll('[data-geo="mentions"]').forEach(el => el.textContent = `${mentioned}/${totalSlots}`);
+      document.querySelectorAll('[data-geo="ais"]').forEach(el => el.textContent = aiLabel);
+      document.querySelectorAll('[data-geo="date"]').forEach(el => el.textContent = `${dayCount}일차 · ${mentioned}/${totalSlots}회 언급`);
+    } catch (e) {
+      console.warn('GEO live stats unavailable:', e);
+    }
+  })();
+</script>
+
+</body>
+</html>

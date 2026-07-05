@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>관리자 — GrowthDiver</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#F5F7F8; --bg-soft:#ECF1F2; --abyss:#0B1626; --ink:#0B1626;
+    --teal:#0E7C86; --teal-deep:#0A5A62; --amber:#F2A65A; --slate:#64707C;
+    --line:#DEE4E7; --white:#FFFFFF; --red:#C0392B;
+    --font-display:'Pretendard Variable', Pretendard, sans-serif;
+    --font-body:'Pretendard Variable', Pretendard, sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ font-family:var(--font-body); background:var(--bg); color:var(--ink); line-height:1.6; }
+  a{ color:inherit; text-decoration:none; }
+
+  /* ── LOGIN ── */
+  .login-screen{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    background:var(--abyss);
+  }
+  .login-box{
+    background:var(--white); border-radius:20px; padding:44px 40px; width:340px;
+  }
+  .login-logo{ font-family:var(--font-mono); font-weight:600; font-size:.95rem; color:var(--abyss); margin-bottom:6px; }
+  .login-sub{ font-size:.82rem; color:var(--slate); margin-bottom:28px; }
+  .login-box input{
+    width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px;
+    font-size:.92rem; font-family:var(--font-body); margin-bottom:14px;
+  }
+  .login-box input:focus{ outline:none; border-color:var(--teal); }
+  .login-box button{
+    width:100%; padding:12px; border:none; border-radius:10px; background:var(--abyss);
+    color:var(--white); font-weight:600; font-size:.92rem; cursor:pointer; transition:background .25s ease;
+  }
+  .login-box button:hover{ background:var(--teal-deep); }
+  .login-error{ color:var(--red); font-size:.82rem; margin-top:10px; display:none; }
+
+  /* ── DASHBOARD ── */
+  #dashboard{ display:none; }
+  .topbar{
+    background:var(--abyss); color:var(--white); padding:16px 32px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .topbar__logo{ font-family:var(--font-mono); font-weight:600; font-size:.9rem; }
+  .topbar__actions{ display:flex; gap:16px; align-items:center; }
+  .topbar__actions a, .topbar__actions button{
+    font-size:.8rem; color:rgba(255,255,255,.7); background:none; border:none; cursor:pointer; font-family:var(--font-body);
+  }
+  .topbar__actions button:hover, .topbar__actions a:hover{ color:var(--white); }
+
+  .layout{ display:flex; min-height:calc(100vh - 56px); }
+  .sidebar{ width:200px; background:var(--white); border-right:1px solid var(--line); padding:24px 0; }
+  .sidebar__item{
+    padding:12px 28px; font-size:.88rem; font-weight:500; color:var(--slate); cursor:pointer;
+    border-left:3px solid transparent; transition:all .2s ease;
+  }
+  .sidebar__item:hover{ background:var(--bg-soft); }
+  .sidebar__item.active{ color:var(--teal-deep); border-left-color:var(--teal); background:var(--bg-soft); font-weight:600; }
+  .sidebar__badge{
+    display:inline-block; background:var(--amber); color:var(--white); font-size:.68rem; font-weight:700;
+    border-radius:99px; padding:1px 7px; margin-left:6px;
+  }
+
+  .main{ flex:1; padding:32px 40px; overflow-y:auto; }
+  .panel{ display:none; }
+  .panel.active{ display:block; }
+
+  .panel__head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
+  .panel__title{ font-family:var(--font-display); font-weight:700; font-size:1.4rem; }
+  .btn{
+    font-size:.85rem; font-weight:600; padding:10px 20px; border-radius:99px; border:none; cursor:pointer;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn--primary{ background:var(--teal); color:var(--white); }
+  .btn--primary:hover{ background:var(--teal-deep); transform:translateY(-1px); }
+  .btn--ghost{ background:transparent; border:1px solid var(--line); color:var(--ink); }
+  .btn--ghost:hover{ border-color:var(--teal); color:var(--teal-deep); }
+  .btn--danger{ background:transparent; color:var(--red); border:1px solid rgba(192,57,43,.3); }
+  .btn--danger:hover{ background:rgba(192,57,43,.06); }
+  .btn--sm{ padding:7px 14px; font-size:.76rem; }
+
+  /* post list */
+  .post-row{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:18px 22px; margin-bottom:12px;
+  }
+  .post-row__title{ font-weight:700; font-size:.96rem; margin-bottom:4px; }
+  .post-row__meta{ font-size:.78rem; color:var(--slate); }
+  .status-badge{ font-family:var(--font-mono); font-size:.68rem; font-weight:600; padding:3px 10px; border-radius:99px; margin-left:8px; }
+  .status-badge--draft{ background:rgba(242,166,90,.15); color:#B8641E; }
+  .status-badge--published{ background:rgba(14,124,134,.12); color:var(--teal-deep); }
+  .post-row__actions{ display:flex; gap:8px; }
+  .empty{ color:var(--slate); font-size:.9rem; text-align:center; padding:60px 0; }
+
+  /* editor */
+  .editor{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .editor__form label{ display:block; font-size:.8rem; font-weight:600; color:var(--slate); margin:16px 0 6px; }
+  .editor__form label:first-child{ margin-top:0; }
+  .editor__form input, .editor__form select, .editor__form textarea{
+    width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:10px;
+    font-size:.9rem; font-family:var(--font-body);
+  }
+  .editor__form textarea{ resize:vertical; }
+  .editor__form input:focus, .editor__form select:focus, .editor__form textarea:focus{ outline:none; border-color:var(--teal); }
+  .editor__hint{ font-size:.74rem; color:var(--slate); margin-top:4px; }
+  .editor__actions{ display:flex; gap:10px; margin-top:22px; }
+
+  .preview{ background:var(--bg-soft); border-radius:16px; padding:26px 28px; }
+  .preview__label{ font-family:var(--font-mono); font-size:.7rem; color:var(--slate); margin-bottom:16px; letter-spacing:.05em; }
+  .preview__card{ background:var(--white); border:1px solid var(--line); border-radius:18px; padding:24px; }
+  .preview__tag{ display:inline-block; font-family:var(--font-mono); font-size:.68rem; font-weight:600; color:var(--teal-deep);
+    background:rgba(14,124,134,.09); padding:5px 12px; border-radius:99px; margin-bottom:12px; }
+  .preview__title{ font-weight:700; font-size:1.05rem; margin-bottom:10px; }
+  .preview__excerpt{ font-size:.86rem; color:var(--slate); margin-bottom:18px; }
+  .preview__content{ font-size:.88rem; line-height:1.85; }
+  .preview__content p{ margin-bottom:14px; }
+  .preview__empty{ color:var(--slate); font-size:.85rem; }
+
+  /* messages */
+  .msg-row{
+    background:var(--white); border:1px solid var(--line); border-radius:14px;
+    padding:20px 22px; margin-bottom:12px; cursor:pointer; transition:border-color .2s ease;
+  }
+  .msg-row:hover{ border-color:var(--teal); }
+  .msg-row.unread{ border-left:3px solid var(--amber); }
+  .msg-row__head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+  .msg-row__from{ font-weight:700; font-size:.92rem; }
+  .msg-row__email{ font-size:.78rem; color:var(--teal-deep); margin-left:8px; }
+  .msg-row__date{ font-family:var(--font-mono); font-size:.72rem; color:var(--slate); }
+  .msg-row__preview{ font-size:.86rem; color:var(--slate); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .msg-row__full{ display:none; font-size:.88rem; color:var(--ink); margin-top:12px; line-height:1.75; white-space:pre-wrap; }
+  .msg-row.open .msg-row__full{ display:block; }
+  .msg-row.open .msg-row__preview{ display:none; }
+  .msg-row__actions{ margin-top:12px; display:none; gap:8px; }
+  .msg-row.open .msg-row__actions{ display:flex; }
+
+  @media (max-width:900px){
+    .editor{ grid-template-columns:1fr; }
+    .layout{ flex-direction:column; }
+    .sidebar{ width:100%; display:flex; padding:8px; }
+    .sidebar__item{ border-left:none; border-bottom:3px solid transparent; }
+    .sidebar__item.active{ border-left-color:transparent; border-bottom-color:var(--teal); }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">GROWTHDIVER · ADMIN</div>
+    <div class="login-sub">본인만 접근 가능한 관리자 페이지입니다.</div>
+    <input type="password" id="pwInput" placeholder="비밀번호" autocomplete="current-password">
+    <button id="loginBtn">로그인</button>
+    <div class="login-error" id="loginError">비밀번호가 올바르지 않습니다.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <div class="topbar__logo">GROWTHDIVER · ADMIN</div>
+    <div class="topbar__actions">
+      <a href="index.html" target="_blank">사이트 보기 ↗</a>
+      <button id="logoutBtn">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="sidebar">
+      <div class="sidebar__item active" data-panel="posts">글 관리</div>
+      <div class="sidebar__item" data-panel="messages">문의 내역 <span class="sidebar__badge" id="unreadBadge" style="display:none">0</span></div>
+    </div>
+
+    <div class="main">
+
+      <!-- POSTS PANEL -->
+      <div class="panel active" id="panel-posts">
+        <div class="panel__head">
+          <div class="panel__title" id="postsTitle">글 관리</div>
+          <button class="btn btn--primary" id="newPostBtn">+ 새 글 작성</button>
+        </div>
+
+        <div id="postListView">
+          <div id="postList"></div>
+        </div>
+
+        <div id="postEditorView" style="display:none">
+          <div class="editor">
+            <div class="editor__form">
+              <label>제목</label>
+              <input type="text" id="fTitle" placeholder="글 제목을 입력하세요">
+
+              <label>카테고리</label>
+              <select id="fCategory">
+                <option value="geo">GEO 실험</option>
+                <option value="ai">AI 자동화</option>
+                <option value="marketing">마케팅 인사이트</option>
+              </select>
+
+              <label>요약 (카드에 보여질 짧은 설명)</label>
+              <textarea id="fExcerpt" rows="2" placeholder="목록에서 보여질 한두 줄 요약"></textarea>
+
+              <label>본문</label>
+              <textarea id="fContent" rows="14" placeholder="본문 내용을 입력하세요. 빈 줄로 문단을 구분하고, **강조**로 볼드 처리할 수 있습니다."></textarea>
+              <div class="editor__hint">빈 줄 = 문단 구분 · **텍스트** = 굵게</div>
+
+              <div class="editor__actions">
+                <button class="btn btn--ghost" id="cancelEditBtn">취소</button>
+                <button class="btn btn--ghost" id="saveDraftBtn">임시저장</button>
+                <button class="btn btn--primary" id="publishBtn">발행하기</button>
+              </div>
+            </div>
+
+            <div class="preview">
+              <div class="preview__label">미리보기 — 실제 게시됐을 때 이렇게 보입니다</div>
+              <div class="preview__card">
+                <span class="preview__tag" id="pvTag">GEO 실험</span>
+                <div class="preview__title" id="pvTitle">제목 없음</div>
+                <div class="preview__excerpt" id="pvExcerpt"></div>
+                <div class="preview__content" id="pvContent"><span class="preview__empty">본문을 입력하면 여기에 미리보기가 표시됩니다.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MESSAGES PANEL -->
+      <div class="panel" id="panel-messages">
+        <div class="panel__head">
+          <div class="panel__title">문의 내역</div>
+        </div>
+        <div id="messageList"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = '/api';
+  let editingId = null;
+
+  // ── Auth ──
+  async function checkSession(){
+    const res = await fetch(`${API}/session`);
+    const data = await res.json();
+    if (data.authenticated) showDashboard();
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', login);
+  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+
+  async function login(){
+    const password = document.getElementById('pwInput').value;
+    const res = await fetch(`${API}/login`, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password })
+    });
+    if (res.ok) { showDashboard(); }
+    else { document.getElementById('loginError').style.display = 'block'; }
+  }
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await fetch(`${API}/logout`, { method:'POST' });
+    location.reload();
+  });
+
+  function showDashboard(){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadPosts();
+    loadMessages();
+  }
+
+  // ── Sidebar nav ──
+  document.querySelectorAll('.sidebar__item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.sidebar__item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`panel-${item.dataset.panel}`).classList.add('active');
+    });
+  });
+
+  // ── Markdown-lite renderer (for preview + public post page) ──
+  function renderContent(text){
+    if (!text) return '<span class="preview__empty">본문을 입력하면 여기에 미리보기가 표시됩니다.</span>';
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    return text.split(/\n\s*\n/).map(para => {
+      let p = esc(para.trim()).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+      return `<p>${p}</p>`;
+    }).join('');
+  }
+
+  const CAT_LABEL = { geo:'GEO 실험', ai:'AI 자동화', marketing:'마케팅 인사이트' };
+
+  // ── Live preview binding ──
+  ['fTitle','fCategory','fExcerpt','fContent'].forEach(id => {
+    document.getElementById(id).addEventListener('input', updatePreview);
+  });
+  function updatePreview(){
+    document.getElementById('pvTag').textContent = CAT_LABEL[document.getElementById('fCategory').value] || '';
+    document.getElementById('pvTitle').textContent = document.getElementById('fTitle').value || '제목 없음';
+    document.getElementById('pvExcerpt').textContent = document.getElementById('fExcerpt').value || '';
+    document.getElementById('pvContent').innerHTML = renderContent(document.getElementById('fContent').value);
+  }
+
+  // ── Post list ──
+  async function loadPosts(){
+    const res = await fetch(`${API}/posts`);
+    const data = await res.json();
+    const list = document.getElementById('postList');
+    if (!data.posts || !data.posts.length){
+      list.innerHTML = '<div class="empty">아직 작성된 글이 없습니다. "새 글 작성"으로 시작해보세요.</div>';
+      return;
+    }
+    list.innerHTML = data.posts.map(p => `
+      <div class="post-row">
+        <div>
+          <div class="post-row__title">${escapeHtml(p.title)}<span class="status-badge status-badge--${p.status}">${p.status === 'published' ? '발행됨' : '임시저장'}</span></div>
+          <div class="post-row__meta">${CAT_LABEL[p.category] || p.category || ''} · ${p.created_at || ''}</div>
+        </div>
+        <div class="post-row__actions">
+          <button class="btn btn--ghost btn--sm" onclick="editPost(${p.id})">수정</button>
+          <button class="btn btn--danger btn--sm" onclick="deletePost(${p.id})">삭제</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  document.getElementById('newPostBtn').addEventListener('click', () => openEditor());
+  document.getElementById('cancelEditBtn').addEventListener('click', closeEditor);
+
+  function openEditor(post){
+    editingId = post ? post.id : null;
+    document.getElementById('postsTitle').textContent = post ? '글 수정' : '새 글 작성';
+    document.getElementById('fTitle').value = post ? post.title : '';
+    document.getElementById('fCategory').value = post ? post.category : 'geo';
+    document.getElementById('fExcerpt').value = post ? post.excerpt : '';
+    document.getElementById('fContent').value = post ? post.content : '';
+    updatePreview();
+    document.getElementById('postListView').style.display = 'none';
+    document.getElementById('postEditorView').style.display = 'block';
+    document.getElementById('newPostBtn').style.display = 'none';
+  }
+  function closeEditor(){
+    editingId = null;
+    document.getElementById('postsTitle').textContent = '글 관리';
+    document.getElementById('postListView').style.display = 'block';
+    document.getElementById('postEditorView').style.display = 'none';
+    document.getElementById('newPostBtn').style.display = 'inline-block';
+    loadPosts();
+  }
+
+  async function editPost(id){
+    const res = await fetch(`${API}/posts/${id}`);
+    const data = await res.json();
+    if (data.post) openEditor(data.post);
+  }
+
+  async function deletePost(id){
+    if (!confirm('이 글을 삭제할까요? 되돌릴 수 없습니다.')) return;
+    await fetch(`${API}/posts/${id}`, { method:'DELETE' });
+    loadPosts();
+  }
+
+  async function savePost(status){
+    const body = {
+      title: document.getElementById('fTitle').value.trim(),
+      category: document.getElementById('fCategory').value,
+      excerpt: document.getElementById('fExcerpt').value.trim(),
+      content: document.getElementById('fContent').value.trim(),
+      status,
+    };
+    if (!body.title || !body.content){ alert('제목과 본문을 입력해주세요.'); return; }
+
+    const url = editingId ? `${API}/posts/${editingId}` : `${API}/posts`;
+    const method = editingId ? 'PUT' : 'POST';
+    const res = await fetch(url, { method, headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+    if (res.ok) closeEditor();
+    else alert('저장에 실패했습니다.');
+  }
+  document.getElementById('saveDraftBtn').addEventListener('click', () => savePost('draft'));
+  document.getElementById('publishBtn').addEventListener('click', () => savePost('published'));
+
+  // ── Messages ──
+  async function loadMessages(){
+    const res = await fetch(`${API}/messages`);
+    if (!res.ok) return;
+    const data = await res.json();
+    const list = document.getElementById('messageList');
+    const unread = (data.messages || []).filter(m => !m.is_read).length;
+    const badge = document.getElementById('unreadBadge');
+    if (unread > 0){ badge.style.display = 'inline-block'; badge.textContent = unread; }
+    else { badge.style.display = 'none'; }
+
+    if (!data.messages || !data.messages.length){
+      list.innerHTML = '<div class="empty">아직 문의가 없습니다.</div>';
+      return;
+    }
+    list.innerHTML = data.messages.map(m => `
+      <div class="msg-row ${m.is_read ? '' : 'unread'}" id="msg-${m.id}">
+        <div class="msg-row__head">
+          <div><span class="msg-row__from">${escapeHtml(m.name)}</span><span class="msg-row__email">${escapeHtml(m.email)}</span></div>
+          <div class="msg-row__date">${m.created_at}</div>
+        </div>
+        <div class="msg-row__preview">${escapeHtml(m.message)}</div>
+        <div class="msg-row__full">${escapeHtml(m.message)}</div>
+        <div class="msg-row__actions">
+          <button class="btn btn--danger btn--sm" onclick="deleteMessage(event, ${m.id})">삭제</button>
+        </div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.msg-row').forEach(row => {
+      row.addEventListener('click', async (e) => {
+        if (e.target.tagName === 'BUTTON') return;
+        row.classList.toggle('open');
+        if (row.classList.contains('unread') && row.classList.contains('open')){
+          const id = row.id.replace('msg-', '');
+          await fetch(`${API}/messages/${id}`, { method:'PATCH' });
+          row.classList.remove('unread');
+          loadMessages();
+        }
+      });
+    });
+  }
+
+  async function deleteMessage(e, id){
+    e.stopPropagation();
+    if (!confirm('이 문의를 삭제할까요?')) return;
+    await fetch(`${API}/messages/${id}`, { method:'DELETE' });
+    loadMessages();
+  }
+
+  checkSession();
+</script>
+
+</body>
+</html>
