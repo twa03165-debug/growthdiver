@@ -118,6 +118,11 @@
   a.nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
   a.nav__cta::after{ display:none; }
   .nav__burger{ display:none; }
+  .nav__links.mobile-open{
+    display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0;
+    background:var(--bg); padding:24px 32px; gap:18px; box-shadow:0 16px 32px rgba(11,22,38,.14);
+    border-bottom:1px solid var(--line);
+  }
   @media (max-width:860px){
     .nav__links{ display:none; }
     .nav__burger{ display:block; font-family:var(--font-mono); font-size:.8rem; color:var(--ink); background:none; border:1px solid var(--line); padding:8px 14px; border-radius:99px; }
@@ -251,14 +256,14 @@
 <nav class="nav">
   <div class="wrap nav__inner">
     <a href="index.html" class="nav__logo"><span class="dot"></span>GROWTHDIVER</a>
-    <div class="nav__links">
+    <div class="nav__links" id="navLinks">
       <a href="index.html">메인</a>
       <a href="about.html" class="active">소개</a>
       <a href="blog.html">블로그</a>
       <a href="portfolio.html">포트폴리오</a>
       <a href="contact.html" class="nav__cta">문의하기</a>
     </div>
-    <button class="nav__burger">MENU</button>
+    <button class="nav__burger" id="navBurger">MENU</button>
   </div>
 </nav>
 
@@ -409,7 +414,7 @@
 
 <footer class="footer">
   <div class="wrap footer__inner">
-    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정 · deepsleepdiver@gmail.com</div>
     <div class="footer__links">
       <a href="index.html">메인</a>
       <a href="about.html">소개</a>
@@ -420,6 +425,22 @@
 </footer>
 
 <script>
+  // 모바일 메뉴 토글
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  if (navBurger && navLinks) {
+    navBurger.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile-open');
+      navBurger.textContent = navLinks.classList.contains('mobile-open') ? '닫기' : 'MENU';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        navBurger.textContent = 'MENU';
+      });
+    });
+  }
+
   const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });

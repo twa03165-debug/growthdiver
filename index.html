@@ -179,6 +179,11 @@
   a.nav__cta:hover{ background:var(--teal-deep); transform:translateY(-2px); box-shadow:0 10px 24px rgba(11,22,38,.25); }
   a.nav__cta::after{ display:none; }
   .nav__burger{ display:none; }
+  .nav__links.mobile-open{
+    display:flex; flex-direction:column; position:absolute; top:100%; left:0; right:0;
+    background:var(--bg); padding:24px 32px; gap:18px; box-shadow:0 16px 32px rgba(11,22,38,.14);
+    border-bottom:1px solid var(--line);
+  }
 
   @media (max-width:860px){
     .nav__links{ display:none; }
@@ -484,14 +489,14 @@
 <nav class="nav" id="nav">
   <div class="wrap nav__inner">
     <div class="nav__logo"><span class="dot"></span>GROWTHDIVER</div>
-    <div class="nav__links">
+    <div class="nav__links" id="navLinks">
       <a href="index.html">메인</a>
       <a href="about.html">소개</a>
       <a href="blog.html">블로그</a>
       <a href="portfolio.html">포트폴리오</a>
       <a href="contact.html" class="nav__cta">문의하기</a>
     </div>
-    <button class="nav__burger">MENU</button>
+    <button class="nav__burger" id="navBurger">MENU</button>
   </div>
 </nav>
 
@@ -619,7 +624,11 @@
             <div class="case__stat-label">오늘 언급 횟수</div>
           </div>
         </div>
-        <a href="portfolio.html" class="btn btn--ghost">전체 포트폴리오 보기 →</a>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="portfolio.html" class="btn btn--ghost">전체 포트폴리오 보기 →</a>
+          <a href="https://blindex.app" target="_blank" rel="noopener" class="btn btn--ghost">blindex.app →</a>
+          <a href="https://deepsleepdiver-lab.github.io/blindex-geo/" target="_blank" rel="noopener" class="btn btn--ghost">GEO 대시보드 →</a>
+        </div>
       </div>
       <div class="case__visual">
         <div class="case__visual-inner">
@@ -684,7 +693,7 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <h2 class="contact__title">더 깊이 들어가 볼까요, <span class="accent">함께?</span></h2>
+    <h2 class="contact__title">더 깊이 들어가 <span class="accent">볼까요?</span></h2>
     <p class="contact__desc">실험처럼 설계하는 마케팅이 필요하다면, 지금 이야기를 시작하세요.</p>
     <a href="contact.html" class="btn btn--primary">문의하기</a>
   </div>
@@ -692,7 +701,7 @@
 
 <footer class="footer">
   <div class="wrap footer__inner">
-    <div class="footer__logo">GROWTHDIVER © 2026 신희정</div>
+    <div class="footer__logo">GROWTHDIVER © 2026 신희정 · deepsleepdiver@gmail.com</div>
     <div class="footer__links">
       <a href="index.html">메인</a>
       <a href="about.html">소개</a>
@@ -703,6 +712,22 @@
 </footer>
 
 <script>
+  // 모바일 메뉴 토글
+  const navBurger = document.getElementById('navBurger');
+  const navLinks = document.getElementById('navLinks');
+  if (navBurger && navLinks) {
+    navBurger.addEventListener('click', () => {
+      navLinks.classList.toggle('mobile-open');
+      navBurger.textContent = navLinks.classList.contains('mobile-open') ? '닫기' : 'MENU';
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('mobile-open');
+        navBurger.textContent = 'MENU';
+      });
+    });
+  }
+
   // Nav scroll state
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
