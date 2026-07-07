@@ -290,7 +290,10 @@
   .section__desc{ color:var(--slate); font-size:1.02rem; max-width:560px; line-height:1.75; }
 
   /* ───────── PHILOSOPHY (signature line) ───────── */
-  .philosophy{ background:var(--abyss); color:var(--white); }
+  .philosophy{
+    background:var(--phil-bg, var(--abyss));
+    color:var(--white);
+  }
   .philosophy .section__eyebrow{ color:#5FC3CC; }
   .philosophy .section__eyebrow::before{ background:#5FC3CC; }
   .philosophy__quote{
@@ -450,6 +453,47 @@
   .faq__item.open .faq__a{ max-height:300px; }
   .faq__a-inner{ padding:0 26px 22px; font-size:.9rem; color:var(--slate); line-height:1.75; }
 
+  /* ───────── SCROLL SCRUB ① : hero → philosophy 하강 연출 ───────── */
+  .hero__depth{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg, #16374F 0%, var(--abyss-2) 55%, var(--abyss) 100%);
+    opacity:0; will-change:opacity;
+  }
+
+  .gauge__meter{
+    margin-top:14px;
+    font-family:var(--font-mono); font-size:.68rem; font-weight:600;
+    color:var(--teal-deep); letter-spacing:.04em;
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+
+  /* ───────── SCROLL SCRUB ② : 방법론 연결 라인 ───────── */
+  .method__dive{
+    position:relative; height:56px; margin-bottom:12px;
+  }
+  .method__dive svg{
+    position:absolute; inset:0; width:100%; height:100%;
+    display:block; overflow:visible;
+  }
+  .method__dive path{
+    fill:none; stroke:var(--teal); stroke-width:2;
+    stroke-linecap:round;
+    vector-effect:non-scaling-stroke;
+  }
+  .method__node{
+    position:absolute; width:12px; height:12px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--line);
+    transform:translate(-50%,-50%);
+    transition:background .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .method__node.lit{
+    background:var(--teal); border-color:var(--teal);
+    box-shadow:0 0 0 5px rgba(14,124,134,.16);
+  }
+  .method__cell .method__num{ transition:color .35s ease; }
+  .method__cell.lit .method__num{ color:var(--amber); }
+  @media (max-width:860px){ .method__dive{ display:none; } }
+
   /* reveal on scroll — apple-style blur/scale reveal */
   .reveal{
     opacity:0; transform:translateY(36px) scale(.97); filter:blur(6px);
@@ -507,10 +551,12 @@
     <div class="gauge__fill" id="gaugeFill"></div>
     <div class="gauge__dot" id="gaugeDot"></div>
   </div>
+  <div class="gauge__meter" id="gaugeMeter">0.0m</div>
 </div>
 
 <!-- HERO -->
 <header class="hero" id="hero">
+  <div class="hero__depth" id="heroDepth" aria-hidden="true"></div>
   <div class="wrap hero__inner">
     <p class="hero__eyebrow">그로스마케팅 파트너, GrowthDiver</p>
     <h1 class="hero__title">마케팅에도,<br><em>깊이</em>가 필요합니다.</h1>
@@ -541,9 +587,17 @@
   </div>
 </section>
 
-<!-- KPI -->
+<!-- METHOD (가설 → 실행 → 증명) -->
 <div class="method">
   <div class="wrap">
+    <div class="method__dive" id="methodDive" aria-hidden="true">
+      <svg viewBox="0 0 1200 56" preserveAspectRatio="none">
+        <path id="divePath" d="M 0 28 L 1200 28"/>
+      </svg>
+      <div class="method__node" style="left:16.66%; top:50%;"></div>
+      <div class="method__node" style="left:50%; top:50%;"></div>
+      <div class="method__node" style="left:83.33%; top:50%;"></div>
+    </div>
     <div class="method__grid">
       <div class="method__cell reveal">
         <div class="method__num">01 · HYPOTHESIS</div>
@@ -741,7 +795,9 @@
   // Depth gauge (visual only)
   const gaugeFill = document.getElementById('gaugeFill');
   const gaugeDot = document.getElementById('gaugeDot');
+  const gaugeMeter = document.getElementById('gaugeMeter');
   const TRACK_H = 220;
+  const MAX_DEPTH = 30; // 페이지 전체 = 수심 30m
 
   function updateGauge(){
     const scrollTop = window.scrollY;
@@ -749,6 +805,7 @@
     const pct = Math.min(Math.max(scrollTop / docHeight, 0), 1);
     gaugeFill.style.height = (pct * 100) + '%';
     gaugeDot.style.top = (pct * TRACK_H) + 'px';
+    if (gaugeMeter) gaugeMeter.textContent = (pct * MAX_DEPTH).toFixed(1) + 'm';
   }
   window.addEventListener('scroll', updateGauge, { passive:true });
   window.addEventListener('resize', updateGauge);
@@ -768,6 +825,68 @@
   }
   window.addEventListener('scroll', updateHeroParallax, { passive:true });
   updateHeroParallax();
+
+  // ── SCROLL SCRUB ①+② : 하강 배경 전환 + 방법론 라인 드로잉 ──
+  const heroDepth = document.getElementById('heroDepth');
+  const philEl = document.querySelector('.philosophy');
+  const divePath = document.getElementById('divePath');
+  const diveWrap = document.getElementById('methodDive');
+  const diveNodes = document.querySelectorAll('.method__node');
+  const methodCells = document.querySelectorAll('.method__cell');
+  const NODE_T = [0.167, 0.5, 0.834]; // 직선상 각 노드 위치 (200/600/1000 ÷ 1200)
+
+  // 색상 보간 헬퍼: [r,g,b,a] 두 색을 t(0~1)로 섞음
+  const mix = (c1, c2, t) => {
+    const v = i => c1[i] + (c2[i] - c1[i]) * t;
+    return `rgba(${Math.round(v(0))}, ${Math.round(v(1))}, ${Math.round(v(2))}, ${(v(3)).toFixed(3)})`;
+  };
+  const C_BG    = [245,247,248,1], C_ABYSS  = [11,22,38,1];
+
+  let pathLen = 0;
+  if (divePath) {
+    pathLen = divePath.getTotalLength();
+    divePath.style.strokeDasharray = pathLen;
+    if (reduceMotion) {
+      // 모션 최소화 환경: 스크럽 없이 완성 상태로 고정
+      divePath.style.strokeDashoffset = 0;
+      diveNodes.forEach(n => n.classList.add('lit'));
+      methodCells.forEach(c => c.classList.add('lit'));
+    } else {
+      divePath.style.strokeDashoffset = pathLen;
+    }
+  }
+
+  let scrubTicking = false;
+  function updateScrub(){
+    scrubTicking = false;
+    if (reduceMotion) return;
+
+    // ① 하강: 스크롤 진행률만큼 히어로와 Philosophy 배경이 함께 수면 → 심해로 전환
+    //    (텍스트는 항상 흰색 — 배경이 어두워지면서 자연스럽게 드러남)
+    if (heroDepth && heroEl) {
+      const p = Math.min(Math.max(window.scrollY / (heroEl.offsetHeight * 0.92), 0), 1);
+      heroDepth.style.opacity = p;
+      if (philEl) {
+        philEl.style.setProperty('--phil-bg', mix(C_BG, C_ABYSS, p));
+      }
+    }
+
+    // ② 방법론 라인: 섹션 진입 정도에 비례해 경로가 그려지고 노드가 점등
+    if (divePath && diveWrap) {
+      const r = diveWrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.min(Math.max((vh * 0.92 - r.top) / (vh * 0.6), 0), 1);
+      divePath.style.strokeDashoffset = pathLen * (1 - p);
+      diveNodes.forEach((n, i) => n.classList.toggle('lit', p >= NODE_T[i]));
+      methodCells.forEach((c, i) => c.classList.toggle('lit', p >= NODE_T[i]));
+    }
+  }
+  function requestScrub(){
+    if (!scrubTicking) { scrubTicking = true; requestAnimationFrame(updateScrub); }
+  }
+  window.addEventListener('scroll', requestScrub, { passive:true });
+  window.addEventListener('resize', requestScrub);
+  updateScrub();
 
   // Reveal on scroll
   const revealEls = document.querySelectorAll('.reveal');
